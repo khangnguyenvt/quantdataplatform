@@ -16,7 +16,8 @@ export default function Timeline() {
     setError("");
     
     try {
-      const r = await fetch(`http://localhost:8000/api/events?ticker=${ticker.toUpperCase()}&page_size=50`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      const r = await fetch(`${apiUrl}/events?ticker=${ticker.toUpperCase()}&page_size=50`);
       if (!r.ok) throw new Error("Failed to fetch");
       const data = await r.json();
       setEvents(data.events || []);

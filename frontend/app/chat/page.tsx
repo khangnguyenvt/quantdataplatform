@@ -16,7 +16,8 @@ export default function Chat() {
     setError("");
     
     try {
-      const r = await fetch("http://localhost:8000/api/ask", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      const r = await fetch(`${apiUrl}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: query })

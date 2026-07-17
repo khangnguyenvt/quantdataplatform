@@ -8,8 +8,8 @@ export default function Explorer() {
   const [error, setError] = useState("");
   
   useEffect(() => {
-    // We fetch from the local API for MVP
-    fetch("http://localhost:8000/api/events?page_size=20")
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+    fetch(`${apiUrl}/events?page_size=20`)
       .then(r => {
         if (!r.ok) throw new Error("Failed to fetch");
         return r.json();
